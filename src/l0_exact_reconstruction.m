@@ -39,10 +39,10 @@ xo = pinv(Pran*A*Prant)*y;
 % generate the all possible "n" choose "s" combinations where 
 % "dim(combrows,1)=n choose s" and "dim(combrows,2)=s"
 combrows = combnk(1:n,s); 
-Ps = zeros(size(combrows,1), n, n);
+%Ps = zeros(size(combrows,1), n, n);
 Xsol = zeros(numel(x), size(combrows,1));
 percent_error = zeros(size(combrows,1), 1);
-a = zeros(size(combrows,1), s);
+%a = zeros(size(combrows,1), s);
 sparsity = zeros(size(combrows,1), 1);
 
 
@@ -57,10 +57,10 @@ parfor t = 1:size(combrows,1)
   
   % the projection matrix "Ps" is 0 everywhere except at the pseudo diagonal 
   % that corresponds the "s" selected rows
-  Ps(t, 1:n, 1:n) = B;   
+  % Ps(t, 1:n, 1:n) = B;   
   
   % "a" contains the coeffients of the linear combinations of the kernal vectors
-  a(t,1:s) = -pinv(B*X)*B*xo;  
+  % a(t,1:s) = -pinv(B*X)*B*xo;  
   
   % zero out small entries less than 1e-6 that come from the numerical 
   % computational error of the computer
