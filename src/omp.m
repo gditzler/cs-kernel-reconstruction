@@ -117,9 +117,9 @@ Ar = At(r);
 N = size(Ar,1);       % number of atoms
 M = size(r,1);        % size of atoms
 
-if k > M
-  error('K cannot be larger than the dimension of the atoms');
-end
+% if k > M
+%   error('K cannot be larger than the dimension of the atoms');
+% end
 
 unitVector = zeros(N,1);
 x = zeros(N,1);
@@ -193,9 +193,9 @@ for kk = 1:k
   end
 end
 
-if (target_resid) && ( normR >= target_resid )
-    fprintf('Warning: did not reach target size of residual\n');
-end
+% if (target_resid) && ( normR >= target_resid )
+%     fprintf('Warning: did not reach target size of residual\n');
+% end
 
 
 if ~slowMode  % (in slowMode, we already have this info)

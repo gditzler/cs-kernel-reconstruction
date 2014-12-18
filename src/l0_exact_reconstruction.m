@@ -47,30 +47,14 @@ sparsity = zeros(size(combrows,1), 1);
 
 
 parfor t = 1:size(combrows,1)
-  
   B = zeros(n, n);
   for l = 1:size(combrows,2)
     % place 1's on the pseudo diagonal of the projection matrix to keep only 
     % the "s" rows selected by the "t^th" combination
     B(combrows(t,l), combrows(t,l)) = 1;   
   end
-  
-  % the projection matrix "Ps" is 0 everywhere except at the pseudo diagonal 
-  % that corresponds the "s" selected rows
-  % Ps(t, 1:n, 1:n) = B;   
-  
-  % "a" contains the coeffients of the linear combinations of the kernal vectors
-  % a(t,1:s) = -pinv(B*X)*B*xo;  
-  
-  % zero out small entries less than 1e-6 that come from the numerical 
-  % computational error of the computer
   Xsol(:,t) = zero_out_smalls(xo + X*(-pinv(B*X)*B*xo), 1e-6); 
-  
-  % compute the percentage error \frac{\|Xsol - x\|_2}{\|x\|_2} for the 
-  % "t^th" cominations and store it the error vector "r"
   percent_error(t) = per_error(Xsol(:,t), x);
-  
-  %compute the number of nonzero elements in \hat{x} at the t^th combination
   sparsity(t) = nnz(Xsol(:,t)); 
 end
 
