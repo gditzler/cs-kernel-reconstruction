@@ -16,6 +16,7 @@ n_avg = 20;
 n = 20;
 k = 7;
 M = 16;
+
 errs = zeros(3,M);
 timez = zeros(3,M);
 
@@ -23,7 +24,7 @@ opts.printEvery = 10000000;
 errFcn = [];
 
 delete(gcp('nocreate'));
-parpool(25);
+parpool(50);
 
 for i = 1:n_avg
   disp(['Running trial ',num2str(i), ' of ', num2str(n_avg)]);
@@ -50,6 +51,7 @@ for i = 1:n_avg
   end
 end
 errs = errs/n_avg;
+timez = timez/n_avg;
 
 h = figure; 
 hold on;
