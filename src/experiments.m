@@ -15,7 +15,9 @@ close all;
 n_avg = 20;
 n = 20;
 k = 7;
-errs = zeros(3,16);
+M = 16;
+errs = zeros(3,M);
+timez = zeros(3,M);
 
 opts.printEvery = 10000000;
 errFcn = [];
@@ -26,15 +28,24 @@ parpool(25);
 for i = 1:n_avg
   disp(['Running trial ',num2str(i), ' of ', num2str(n_avg)]);
   
-  for m = 1:16
+  for m = 1:M
     [A, x, y] = cs_model(m, n, k);
     
+    % KR
+    tic;
     errs(1, m) = errs(1, m) + l0_exact_reconstruction(A, x, y);
+    timez(1, m) = timez(1, m) + toc;
     
+    % CoSamp
+    tic;
     x_hat = cosamp(A, y, k, errFcn, opts);
+    timez(2, m) = timez(2, m) + toc;
     errs(2, m) = errs(2, m) + per_error(x_hat, x);
     
+    % OMP
+    tic;
     x_omp = omp(A, y, k, errFcn, opts);
+    timez(3, m) = timez(3, m) + toc;
     errs(3, m) = errs(3, m) + per_error(x_omp, x);
   end
 end
@@ -46,7 +57,7 @@ box on;
 plot(errs(1,:), 'ro-', 'LineWidth', 2);
 plot(errs(2,:), 'bs-', 'LineWidth', 2);
 plot(errs(3,:), 'k^-', 'LineWidth', 2);
-axis tight;
+xlim([1,M])
 legend('KR', 'CoSamp', 'OMP', 'Location', 'best');
 xlabel('m', 'FontSize', 20);
 ylabel('reconstruction error', 'FontSize', 20);
