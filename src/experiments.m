@@ -65,5 +65,18 @@ xlabel('m', 'FontSize', 20);
 ylabel('reconstruction error', 'FontSize', 20);
 set(gca, 'fontsize', 20);
 
+g = figure; 
+hold on;
+box on;
+plot(timez(1,:), 'ro-', 'LineWidth', 2);
+plot(timez(2,:), 'bs-', 'LineWidth', 2);
+plot(timez(3,:), 'k^-', 'LineWidth', 2);
+xlim([1,M])
+legend('KR', 'CoSamp', 'OMP', 'Location', 'best');
+xlabel('m', 'FontSize', 20);
+ylabel('time (s)', 'FontSize', 20);
+set(gca, 'fontsize', 20);
+
+
 save('../mat/gaussian_reconstruction_n20k7.mat');
 delete(gcp('nocreate'));
