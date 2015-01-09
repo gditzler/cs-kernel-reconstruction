@@ -1,4 +1,4 @@
-function x = l1_approximate_reconstruction(A, y)
+function [x_kr, x_l1] = l1_approximate_reconstruction(A, y)
 %  x = l1_approximate_reconstruction(A, y)
 % 
 %  INPUTS 
@@ -28,5 +28,6 @@ cvx_begin quiet
     A*x == y; 
 cvx_end
 
+x_l1 = x;
 [~, i] = sort(abs(x));
-x(i(1:s)) = 0;
+x_kr(i(1:s)) = 0;
