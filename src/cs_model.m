@@ -1,5 +1,5 @@
-function [A, x, y] = cs_model(m,n,k)
-% [A, x, y] = cs_model(m,n,k)
+function [A, x, y] = cs_model(m, n, k)
+% [A, x, y] = cs_model(m, n, k)
 % 
 %  INPUTS 
 %  @m: size(A,1):   
@@ -23,10 +23,10 @@ function [A, x, y] = cs_model(m,n,k)
 A = randn(m,n); 
 while m ~= rank(A)
   clear A;
-  A=randn(m,n);
+  A = randn(m,n);
 end
 x = zeros(n,1);
 p = randn(k,1);   % generate "k" non-zero elements of "x"
 rp = randperm(n); % generate random permutations
 x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
-y = A*x;   % generate the linear model: "y=Ax"
+y = A*x;          % generate the linear model: "y=Ax"
