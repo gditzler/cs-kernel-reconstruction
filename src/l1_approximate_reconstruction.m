@@ -31,3 +31,4 @@ cvx_end
 x_l1 = x;
 [~, i] = sort(abs(x));
 x_kr(i(1:s)) = 0;
+x_kr = x_kr';
