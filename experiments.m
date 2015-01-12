@@ -28,7 +28,7 @@ opts.printEvery = 10000000;
 errFcn = [];
 
 delete(gcp('nocreate'));
-parpool(6);
+parpool(60);
 
 for i = 1:n_avg
   disp(['Running trial ',num2str(i), ' of ', num2str(n_avg)]);
