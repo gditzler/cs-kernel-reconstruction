@@ -18,6 +18,7 @@ legend('KR', 'CoSamp', 'OMP', 'L1KR','Location', 'best');
 xlabel('m', 'FontSize', 20);
 ylabel('reconstruction error', 'FontSize', 20);
 set(gca, 'fontsize', 20);
+saveas(h, ['eps/error_n',num2str(n),'k',num2str(k),'ka',num2str(k_alg),'.eps'], 'eps2c')
 
 g = figure; 
 hold on;
@@ -31,6 +32,7 @@ legend('KR', 'CoSamp', 'OMP', 'L1KR','Location', 'best');
 xlabel('m', 'FontSize', 20);
 ylabel('time (s)', 'FontSize', 20);
 set(gca, 'fontsize', 20);
+saveas(g, ['eps/times_n',num2str(n),'k',num2str(k),'ka',num2str(k_alg),'.eps'], 'eps2c')
 
 q = figure; 
 hold on;
@@ -44,3 +46,4 @@ legend('KR', 'CoSamp', 'OMP', 'L1KR','Location', 'best');
 xlabel('m', 'FontSize', 20);
 ylabel('sparsity', 'FontSize', 20);
 set(gca, 'fontsize', 20);
+saveas(q, ['eps/sparsity_n',num2str(n),'k',num2str(k),'ka',num2str(k_alg),'.eps'], 'eps2c')
