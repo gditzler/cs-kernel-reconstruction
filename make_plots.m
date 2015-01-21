@@ -8,20 +8,22 @@ load mat/gaussian_reconstruction_n20k7ka7.mat
 h = figure; 
 hold on;
 box on;
-plot(errs(2,:), 'ro-', 'LineWidth', 2);
-plot(errs(3,:), 'bs-', 'LineWidth', 2);
-plot(errs(4,:), 'k^-', 'LineWidth', 2);
-plot(errs(5,:), 'cp-', 'LineWidth', 2);
+plot(errs_no_norm(2,:), 'ro-', 'LineWidth', 2);
+plot(errs_no_norm(3,:), 'bs-', 'LineWidth', 2);
+plot(errs_no_norm(4,:), 'k^-', 'LineWidth', 2);
+plot(errs_no_norm(5,:), 'cp-', 'LineWidth', 2);
 xlim([1, M])
+ylim([0, 1.5*max(errs_no_norm(2,:))])
 legend('KR', 'CoSamp', 'OMP', 'L1KR','Location', 'best');
 xlabel('m', 'FontSize', 20);
 ylabel('reconstruction error', 'FontSize', 20);
 set(gca, 'fontsize', 20);
+saveas(h, ['eps/error_n',num2str(n),'k',num2str(k),'ka',num2str(k_alg),'.eps'], 'eps2c')
 
 g = figure; 
 hold on;
 box on;
-plot(timez(2,:), 'ro-', 'LineWidth', 2);
+plot(timez(1,:), 'ro-', 'LineWidth', 2);
 plot(timez(3,:), 'bs-', 'LineWidth', 2);
 plot(timez(4,:), 'k^-', 'LineWidth', 2);
 plot(timez(5,:), 'cp-', 'LineWidth', 2);
@@ -30,6 +32,7 @@ legend('KR', 'CoSamp', 'OMP', 'L1KR','Location', 'best');
 xlabel('m', 'FontSize', 20);
 ylabel('time (s)', 'FontSize', 20);
 set(gca, 'fontsize', 20);
+saveas(g, ['eps/times_n',num2str(n),'k',num2str(k),'ka',num2str(k_alg),'.eps'], 'eps2c')
 
 q = figure; 
 hold on;
@@ -43,3 +46,4 @@ legend('KR', 'CoSamp', 'OMP', 'L1KR','Location', 'best');
 xlabel('m', 'FontSize', 20);
 ylabel('sparsity', 'FontSize', 20);
 set(gca, 'fontsize', 20);
+saveas(q, ['eps/sparsity_n',num2str(n),'k',num2str(k),'ka',num2str(k_alg),'.eps'], 'eps2c')

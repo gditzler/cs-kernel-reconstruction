@@ -1,4 +1,4 @@
-function [A, x, y] = cs_model(m, n, k)
+function [A, x, y] = cs_model(m, n, k, type)
 % [A, x, y] = cs_model(m, n, k)
 % 
 %  INPUTS 
@@ -20,13 +20,34 @@ function [A, x, y] = cs_model(m, n, k)
 %  LICENSE
 %    MIT
 
-A = randn(m,n); 
-while m ~= rank(A)
-  clear A;
-  A = randn(m,n);
+if strcmp(type, 'Gaussian')
+  A = randn(m,n); 
+  while m ~= rank(A)
+    A = randn(m,n);
+  end
+  x = zeros(n,1);
+  p = randn(k,1);   % generate "k" non-zero elements of "x"
+  rp = randperm(n); % generate random permutations
+  x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
+  y = A*x;          % generate the linear model: "y=Ax"
+elseif strcmp(type, 'GaussianShift')
+  A = randn(m,n); 
+  while m ~= rank(A)
+    A = randn(m,n);
+  end
+  x = zeros(n,1);
+  p = randn(k,1);   % generate "k" non-zero elements of "x"
+  rp = randperm(n); % generate random permutations
+  x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
+  y = A*x;          % generate the linear model: "y=Ax"
+  y = y*1.1;
+elseif strcmp(type, 'Fourier')
+  [Y,X] = meshgrid(0:n-1,0:n-1);
+  A = 1/sqrt(n) * exp( -1i/n *X.*Y);
+  
+  x = zeros(n,1);
+  p = randn(k,1);   % generate "k" non-zero elements of "x"
+  rp = randperm(n); % generate random permutations
+  x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
+  y = A*x;
 end
-x = zeros(n,1);
-p = randn(k,1);   % generate "k" non-zero elements of "x"
-rp = randperm(n); % generate random permutations
-x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
-y = A*x;          % generate the linear model: "y=Ax"
