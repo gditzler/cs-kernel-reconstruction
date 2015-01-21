@@ -15,10 +15,10 @@ close all;
 addpath('src/')
 
 n_avg = 10;
-n = 50;
+n = 20;
 k = 7;
-M = 16;
-k_alg = 7;
+M = n-3;
+k_alg = 10;
 
 errs = zeros(6, M);
 errs_no_norm = zeros(6, M);
