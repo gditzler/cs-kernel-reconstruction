@@ -17,14 +17,9 @@ addpath('src/')
 n_avg = 10;
 n = 20;
 k = 7;
-<<<<<<< HEAD
 M = n-3;
 k_alg = 10;
-=======
-M = 16;
-k_alg = 7;
 types = {'Gaussian', 'GaussianShift'};
->>>>>>> 914399cb38c0a141d92fd22da04e13e7a1b4359a
 
 
 for t = 1:length(types)
