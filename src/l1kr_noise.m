@@ -16,9 +16,6 @@ function x_kr = l1kr_noise(A, y, epsilon)
 %
 %  LICENSE
 %    MIT
-if nargin == 2
-  noise = 0;
-end
 X = null(A);
 s = size(X,2); % "s=dim(ker(A))"
 n = size(A,2);
@@ -31,7 +28,7 @@ cvx_begin quiet
 cvx_end
 
 [~, i] = sort(abs(x));
-j = setdiff(1:n, i(1:s));
+j = setdiff(1:n, i(1:(s-epsilon)));
 xhat = inv(A(:, j))*y;
 x_kr = zeros(n,1);
 x_kr(j) = xhat;

@@ -16,9 +16,6 @@ function x_kr = l1kr(A, y)
 %
 %  LICENSE
 %    MIT
-if nargin == 2
-  noise = 0;
-end
 X = null(A);
 s = size(X,2); % "s=dim(ker(A))"
 n = size(A,2);
