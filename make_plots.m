@@ -3,7 +3,16 @@ clc;
 clear;
 close all;
 
-load mat/gaussian_reconstruction_n20k7ka7.mat
+% load mat/gaussian_reconstruction_n20k7ka10.mat
+% load mat/gaussian_reconstruction_n20k7ka7.mat
+% load mat/gaussian_reconstruction_n25k7ka7.mat
+
+% load mat/Gaussian_n20k7ka10.mat
+% load mat/Gaussian_n20k7ka7.mat
+% load mat/Gaussian_n20k7ka3.mat
+% load mat/GaussianShift_n20k7ka10.mat
+% load mat/GaussianShift_n20k7ka7.mat
+% load mat/GaussianShift_n20k7ka3.mat
 
 h = figure; 
 hold on;
