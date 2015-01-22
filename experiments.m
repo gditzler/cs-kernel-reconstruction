@@ -14,7 +14,7 @@ close all;
 
 addpath('src/')
 
-n_avg = 10;
+n_avg = 30;
 n = 20;
 k = 7;
 M = n-3;
