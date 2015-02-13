@@ -23,10 +23,10 @@ types = {'Gaussian', 'GaussianShift'};
 
 
 for t = 1:length(types)
-  errs = zeros(6, M);
-  errs_no_norm = zeros(6, M);
-  timez = zeros(6, M);
-  sparsity = zeros(6, M);
+  errs = zeros(7, M);
+  errs_no_norm = zeros(7, M);
+  timez = zeros(7, M);
+  sparsity = zeros(7, M);
 
   opts.printEvery = 10000000;
   errFcn = [];
@@ -75,14 +75,23 @@ for t = 1:length(types)
 
       % L1-Approx of KR
       tic;
-      x_l1kr = l1kr(A, y);
+      [x_l1kr, x_l1] = l1_approximate_reconstruction(A, y);
       timez(q, m) = timez(q, m) + toc;
       errs(q, m) = errs(q, m) + per_error(x_l1kr/norm(x_l1kr), x/norm(x));
       errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_l1kr, x);
       sparsity(q, m) = sparsity(q, m) + sum(abs(x_l1kr) >= sqrt(eps))/numel(x);
+      q = q+1;
+      
+      errs(q, m) = errs(q, m) + per_error(x_l1/norm(x_l1), x/norm(x));
+      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_l1, x);
+      sparsity(q, m) = sparsity(q, m) + sum(abs(x_l1) >= sqrt(eps))/numel(x);
+      
+      
+      
     end
   end
   errs = errs/n_avg;
+  errs_no_norm = errs_no_norm/n_avg;
   timez = timez/n_avg;
   sparsity = sparsity/n_avg;
 
