@@ -9,7 +9,7 @@ close all;
 
 % load mat/Gaussian_n20k7ka10.mat
 % load mat/Gaussian_n20k7ka7.mat
-% load mat/Gaussian_n20k7ka3.mat
+load mat/Gaussian_n20k7ka3.mat
 % load mat/GaussianShift_n20k7ka10.mat
 % load mat/GaussianShift_n20k7ka7.mat
 % load mat/GaussianShift_n20k7ka3.mat
