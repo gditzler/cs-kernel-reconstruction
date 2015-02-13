@@ -18,7 +18,7 @@ n_avg = 250;
 n = 20;
 k = 7;
 M = n-3;
-k_alg = 15;
+k_alg = 9;
 types = {'Gaussian', 'GaussianShift'};
 
 
@@ -32,12 +32,12 @@ for t = 1:length(types)
   errFcn = [];
 
   delete(gcp('nocreate'));
-  parpool(60);
+  parpool(20);
 
   for i = 1:n_avg
     disp(['Running trial ',num2str(i), ' of ', num2str(n_avg)]);
 
-    for m = 1:M
+    for m = 2:M
       [A, x, y] = cs_model(m, n, k, types{t});
       q = 1;
 
