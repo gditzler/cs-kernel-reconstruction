@@ -1,4 +1,4 @@
-function [x_kr, x_l1] = l1_approximate_reconstruction(A, y, noise)
+function [x_kr, x_l1] = l1_approximate_reconstruction(A, y)
 %  x = l1_approximate_reconstruction(A, y)
 % 
 %  INPUTS 
@@ -16,9 +16,6 @@ function [x_kr, x_l1] = l1_approximate_reconstruction(A, y, noise)
 %
 %  LICENSE
 %    MIT
-if nargin == 2
-  noise = 0;
-end
 X = null(A);
 s = size(X,2); % "s=dim(ker(A))"
 n = size(A,2);
@@ -34,11 +31,7 @@ x_l1 = x;
 x_kr = x;
 [~, i] = sort(abs(x));
 
-if noise
-  j = setdiff(1:n, i(1:s));
-  xhat = inv(A(:, j))*y;
-  x_kr = zeros(n,1);
-  x_kr(j) = xhat;
-else
-  x_kr(i(1:s)) = 0;
-end
+j = setdiff(1:n, i(1:s));
+xhat = inv(A(:, j))*y;
+x_kr = zeros(n,1);
+x_kr(j) = xhat;
