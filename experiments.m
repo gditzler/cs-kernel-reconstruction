@@ -14,12 +14,12 @@ close all;
 
 addpath('src/')
 
-n_avg = 250;
+n_avg = 15;
 n = 20;
-k = 5;
+k = 19;
 M = n-3;
 k_alg = 9;
-types = {'Gaussian', 'GaussianShift'};
+types = {'Uni'};
 
 
 for t = 1:length(types)
@@ -31,8 +31,8 @@ for t = 1:length(types)
   opts.printEvery = 10000000;
   errFcn = [];
 
-  delete(gcp('nocreate'));
-  parpool(20);
+  %delete(gcp('nocreate'));
+  %parpool(20);
 
   for i = 1:n_avg
     disp(['Running trial ',num2str(i), ' of ', num2str(n_avg)]);
@@ -43,16 +43,16 @@ for t = 1:length(types)
 
       % KR
       tic;
-      [~, x_kr_err, x_kr_spar] = l0_exact_reconstruction(A, x, y);
-      timez(q, m) = timez(q, m) + toc;
-      errs(q, m) = errs(q, m) + per_error(x_kr_err/norm(x_kr_err), x/norm(x));
-      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_kr_err, x);
-      sparsity(q, m) = sparsity(q, m) + sum(abs(x_kr_err) <= sqrt(eps))/numel(x);
+      %[~, x_kr_err, x_kr_spar] = l0_exact_reconstruction(A, x, y);
+      %timez(q, m) = timez(q, m) + toc;
+      %errs(q, m) = errs(q, m) + per_error(x_kr_err/norm(x_kr_err), x/norm(x));
+      %errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_kr_err, x);
+      %sparsity(q, m) = sparsity(q, m) + sum(abs(x_kr_err) <= sqrt(eps))/numel(x);
       q = q+1;
 
-      errs(q, m) = errs(q, m) + per_error(x_kr_spar/norm(x_kr_spar), x/norm(x));
-      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_kr_spar, x);
-      sparsity(q, m) = sparsity(q, m) + sum(abs(x_kr_spar) <= sqrt(eps))/numel(x);
+      %errs(q, m) = errs(q, m) + per_error(x_kr_spar/norm(x_kr_spar), x/norm(x));
+      %errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_kr_spar, x);
+      %sparsity(q, m) = sparsity(q, m) + sum(abs(x_kr_spar) <= sqrt(eps))/numel(x);
       q = q+1;
 
       % CoSamp
@@ -86,8 +86,6 @@ for t = 1:length(types)
       errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_l1, x);
       sparsity(q, m) = sparsity(q, m) + sum(abs(x_l1) >= sqrt(eps))/numel(x);
       
-      
-      
     end
   end
   errs = errs/n_avg;
@@ -96,8 +94,8 @@ for t = 1:length(types)
   sparsity = sparsity/n_avg;
 
 
-  save(['mat/',types{t}, '_n', num2str(n), 'k', num2str(k), ...
-    'ka',num2str(k_alg),'.mat']);
+  %save(['mat/',types{t}, '_n', num2str(n), 'k', num2str(k), ...
+  %  'ka',num2str(k_alg),'.mat']);
 end
 
-delete(gcp('nocreate'));
+%delete(gcp('nocreate'));

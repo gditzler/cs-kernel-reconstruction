@@ -30,6 +30,16 @@ if strcmp(type, 'Gaussian')
   rp = randperm(n); % generate random permutations
   x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
   y = A*x;          % generate the linear model: "y=Ax"
+elseif strcmp(type, 'Uni')
+  A = rand(m,n); 
+  while m ~= rank(A)
+    A = rand(m,n);
+  end
+  x = zeros(n,1);
+  p = randn(k,1);   % generate "k" non-zero elements of "x"
+  rp = randperm(n); % generate random permutations
+  x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
+  y = A*x;          % generate the linear model: "y=Ax"
 elseif strcmp(type, 'GaussianShift')
   A = randn(m,n); 
   while m ~= rank(A)
@@ -50,4 +60,15 @@ elseif strcmp(type, 'Fourier')
   rp = randperm(n); % generate random permutations
   x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
   y = A*x;
+elseif strcmp(type, 'Noise')
+  A = randn(m,n); 
+  while m ~= rank(A)
+    A = randn(m,n);
+  end
+  x = zeros(n,1);
+  p = randn(k,1);   % generate "k" non-zero elements of "x"
+  rp = randperm(n); % generate random permutations
+  x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
+  y = A*x;          % generate the linear model: "y=Ax"
+  
 end
