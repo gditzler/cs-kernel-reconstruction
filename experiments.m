@@ -16,7 +16,7 @@ addpath('src/')
 
 n_avg = 250;
 n = 20;
-k = 9;
+k = 5;
 M = n-3;
 k_alg = 9;
 types = {'Gaussian', 'GaussianShift'};
