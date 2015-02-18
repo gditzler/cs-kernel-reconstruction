@@ -19,6 +19,8 @@ function [x_kr, x_l1] = l1_approximate_reconstruction(A, y, noise, delta)
 %
 %  LICENSE
 %    MIT
+
+l1shift = 3;
 if nargin == 2 
   noise = false;
   delta = 0;
@@ -41,7 +43,23 @@ x_l1 = x;
 
 if noise == false
   [~, i] = sort(abs(x));
-  j = setdiff(1:n, i(1:s));
+  
+  smallest = i(1:(s+l1shift));
+  combrows = combnk(smallest, s); 
+  
+  sp = zeros(size(combrows, 1), 1);
+  parfor r = 1:size(combrows, 1)
+    j = setdiff(1:n, combrows(r, :));
+    
+    xhat = inv(A(:, j))*y;
+    x_kr = zeros(n, 1);
+    x_kr(j) = xhat;
+    sp(r) = sum(abs(x_kr) > 10e-15);
+  end
+  [~, i] = sort(sp);
+  
+
+  j = setdiff(1:n, combrows(i(1), :));
   xhat = inv(A(:, j))*y;
   x_kr = zeros(n,1);
   x_kr(j) = xhat;

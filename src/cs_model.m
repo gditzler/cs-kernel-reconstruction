@@ -50,7 +50,8 @@ elseif strcmp(type, 'GaussianShift')
   rp = randperm(n); % generate random permutations
   x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
   y = A*x;          % generate the linear model: "y=Ax"
-  y = y*1.25    ;
+  y = y*1.25;
+  x = x*1.25;
 elseif strcmp(type, 'Fourier')
   [Y,X] = meshgrid(0:n-1,0:n-1);
   A = 1/sqrt(n) * exp( -1i/n *X.*Y);
