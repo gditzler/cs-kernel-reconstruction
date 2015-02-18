@@ -21,7 +21,7 @@ M = n-3;
 k_alg = 9;
 types = {'Gaussian','Uni'};
 delete(gcp('nocreate'));
-parpool(20);
+parpool(50);
 
 for t = 1:length(types)
   errs = zeros(7, M);
