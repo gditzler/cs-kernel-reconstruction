@@ -18,7 +18,7 @@ n_avg = 30;
 n = 20;
 k = 7;
 M = n-3;
-k_alg = 15;
+k_alg = 5;
 types = {'Gaussian', 'GaussianShift'};
 
 
