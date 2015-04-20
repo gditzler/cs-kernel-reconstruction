@@ -19,7 +19,7 @@ n = 20;
 k = 7;
 M = n-3;
 k_alg = 9;
-types = {'Gaussian','Uni'};
+types = {'Gaussian', 'Uni', 'Bernoulli'};
 delete(gcp('nocreate'));
 parpool(50);
 
@@ -31,8 +31,6 @@ for t = 1:length(types)
 
   opts.printEvery = 10000000;
   errFcn = [];
-
-  
 
   for i = 1:n_avg
     disp(['Running trial ',num2str(i), ' of ', num2str(n_avg)]);
