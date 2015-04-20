@@ -1,2 +1,5 @@
 *.swp
 *.m~
+eps/
+mat/
+pdf/

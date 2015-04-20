@@ -19,7 +19,7 @@ n = 20;
 k = 9;
 M = n-3;
 k_alg = 9;
-types = {'Gaussian','Uni'};
+types = {'Gaussian', 'Uni',   'Bernoulli'};
 delete(gcp('nocreate'));
 parpool(50);
 
@@ -31,8 +31,6 @@ for t = 1:length(types)
 
   opts.printEvery = 10000000;
   errFcn = [];
-
-  
 
   for i = 1:n_avg
     disp(['Running trial ',num2str(i), ' of ', num2str(n_avg)]);
@@ -75,7 +73,7 @@ for t = 1:length(types)
 
       % L1-Approx of KR
       tic;
-      [x_l1kr, x_l1] = l1_approximate_reconstruction(A, y);
+      [x_l1kr, x_l1] = l1kr(A, y);
       timez(q, m) = timez(q, m) + toc;
       errs(q, m) = errs(q, m) + per_error(x_l1kr/norm(x_l1kr), x/norm(x));
       errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_l1kr, x);
@@ -92,7 +90,6 @@ for t = 1:length(types)
   errs_no_norm = errs_no_norm/n_avg;
   timez = timez/n_avg;
   sparsity = sparsity/n_avg;
-
 
   save(['mat/',types{t}, '_n', num2str(n), 'k', num2str(k), ...
     'ka',num2str(k_alg),'.mat']);
