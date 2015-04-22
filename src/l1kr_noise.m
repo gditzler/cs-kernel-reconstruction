@@ -1,4 +1,4 @@
-function [x_kr, x_l1] = l1kr_noise(A, y, epsilon, shift)
+function [x_kr, x_l1] = l1kr_noise(A, y, epsilon)
 %  [x_kr, x_l1] = l1kr_noise(A, y, shift)
 % 
 %  INPUTS 
@@ -19,17 +19,14 @@ function [x_kr, x_l1] = l1kr_noise(A, y, epsilon, shift)
 %  LICENSE
 %    MIT
 
-if nargin == 2 
-  shift = 3;
-end
 X = null(A);
-s = size(X,2); % "s=dim(ker(A))"
-n = size(A,2);
+s = size(X, 2); % "s=dim(ker(A))"
+n = size(A, 2);
 
 % minimize the l1-norm
 cvx_begin quiet
   variable x(n,1)
-  minimize(norm(x,1))
+  minimize(norm(x, 1))
   subject to
     norm(A*x - y, 2) <= epsilon;
 cvx_end
@@ -43,11 +40,12 @@ sgn = sign(x);
 [~, i] = sort(abs(x));
 
 smallest = i(1:s);     % find the s+delta smallest entriries 
-sgn_smallest = sgn(smallest);
+largest = setdiff(1:n, smallest);
+sgn_largest = sgn(x(largest));
 lgst_smallest = max(abs(x(smallest)));
 
-x_tmp(sgn_smallest == 1) = lgst_smallest + x_tmp(sgn_smallest == 1);
-x_tmp(sgn_smallest == -1) = lgst_smallest - x_tmp(sgn_smallest == -1);
+x_tmp(sgn_largest == 1) = lgst_smallest - x_tmp(sgn_largest == 1);
+x_tmp(sgn_largest == -1) = lgst_smallest + x_tmp(sgn_largest == -1);
 
 sup_set = find(abs(x_tmp) <= epsilon);
 smallest = union(smallest, sup_set);
@@ -67,13 +65,12 @@ parfor r = 1:size(combrows, 1)
   x_kr_final = x_kr;
   
   for k = 1:n
-    if norm(x_kr(q(1:k)),2) < epsilon
+    if norm(x_kr(q(1:k)), 2) < epsilon
       x_kr_final(q(k)) = 0;
     else
       break;
     end
   end
-  
   
   sp(r) = sum(abs(x_kr_final) > 10e-15);  % sparisty 
 end
@@ -82,12 +79,12 @@ end
 % solve for the sparest solution again
 j = setdiff(1:n, combrows(i(1), :));
 xhat = A(:, j)\y;
-x_kr = zeros(n,1);
+x_kr = zeros(n, 1);
 x_kr(j) = xhat;
 q = sort(abs(x_kr));
 x_kr_final = x_kr;
 for k = 1:n
-  if norm(x_kr(q(1:k)),2) < epsilon
+  if norm(x_kr(q(1:k)), 2) < epsilon
     x_kr_final(q(k)) = 0;
   else
     break;
