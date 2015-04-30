@@ -14,9 +14,9 @@ delete(gcp('nocreate'));
 parpool(50);
 
 for t = 1:length(types)
-  timez = zeros(length(shifts), length(5:M));
-  errs = zeros(length(shifts), length(5:M));
-  errs_no_norm = zeros(length(shifts), length(5:M));
+  timez = zeros(length(shifts), M);
+  errs = zeros(length(shifts), M);
+  errs_no_norm = zeros(length(shifts), M);
 
   for i = 1:n_avg
     disp(['Running trial ',num2str(i), ' of ', num2str(n_avg)]);
