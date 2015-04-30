@@ -21,15 +21,15 @@ for t = 1:length(types)
   for i = 1:n_avg
     disp(['Running trial ',num2str(i), ' of ', num2str(n_avg)]);
     
-    for n = 1:length(shifts)
+    for q = 1:length(shifts)
       for m = 5:M
         [A, x, y] = cs_model(m, n, k, types{t});
 
         tic;
-        [x_l1kr, x_l1] = l1kr(A, y, shifts(n));
-        timez(n, m) = timez(n, m) + toc;
-        errs(n, m) = errs(n, m) + per_error(x_l1kr/norm(x_l1kr), x/norm(x));
-        errs_no_norm(n, m) = errs_no_norm(n, m) + per_error(x_l1kr, x);       
+        [x_l1kr, x_l1] = l1kr(A, y, shifts(q));
+        timez(q, m) = timez(q, m) + toc;
+        errs(q, m) = errs(q, m) + per_error(x_l1kr/norm(x_l1kr), x/norm(x));
+        errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_l1kr, x);       
       end
     end
   end
