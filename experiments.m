@@ -19,7 +19,7 @@ n = 20;
 k = 7;
 M = n-3;
 k_alg = 9;
-types = {'Gaussian', 'Uni',   'Bernoulli'};
+types = {'Gaussian', 'Uni', 'Bernoulli'};
 delete(gcp('nocreate'));
 parpool(50);
 
