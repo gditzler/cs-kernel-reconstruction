@@ -85,7 +85,7 @@ j = setdiff(1:n, combrows(i(1), :));
 xhat = A(:, j)\y;
 x_kr = zeros(n, 1);
 x_kr(j) = xhat;
-q = sort(abs(x_kr));
+[~, q] = sort(abs(x_kr));
 x_kr_final = x_kr;
 for k = 1:n
   if norm(x_kr(q(1:k)), 2) < epsilon
