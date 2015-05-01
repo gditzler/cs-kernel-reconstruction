@@ -32,7 +32,7 @@ for i = 1:n_avg
     x_cosamp = cosamp(A, y, k_alg, errFcn, opts);
     x_omp = omp(A, y, k_alg, errFcn, opts);
     [x_l1kr, x_l1] = l1kr(A, y);
-    [x_l1krn, x_l1n] = l1kr_noise(A, y);
+    [x_l1krn, x_l1n] = l1kr_noise(A, y, epsilon);
 
     errs_clean(1, mm) = errs_clean(1, mm) + per_error(x, x_kr_spar);
     errs_clean(2, mm) = errs_clean(2, mm) + per_error(x, x_cosamp);
@@ -47,7 +47,7 @@ for i = 1:n_avg
     x_hat = cosamp(A, y, k_alg, errFcn, opts);
     x_omp = omp(A, y, k_alg, errFcn, opts);
     [x_l1kr, x_l1] = l1kr(A, y);
-    [x_l1krn, x_l1n] = l1kr_noise(A, y);
+    [x_l1krn, x_l1n] = l1kr_noise(A, y, epsilon);
 
     errs_noise(1, mm) = errs_noise(1, mm) + per_error(x, x_kr_spar);
     errs_noise(2, mm) = errs_noise(2, mm) + per_error(x, x_cosamp);
