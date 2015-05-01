@@ -12,6 +12,8 @@ clc;
 clear;
 close all;
 
+set(0,'RecursionLimit', 5000);
+
 addpath('src/')
 
 n_avg = 250;

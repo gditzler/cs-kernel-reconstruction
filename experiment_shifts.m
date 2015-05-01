@@ -4,11 +4,11 @@ close all;
 
 addpath('src/')
 
-n_avg = 250;
+n_avg = 100;
 n = 50;
 k = 10;
 M = n-3;
-shifts = [0,1,2,3,4,5,6,7,8];
+shifts = [0,1,2,3,4];
 types = {'Gaussian', 'Uni', 'Bernoulli'};
 delete(gcp('nocreate'));
 parpool(50);
@@ -36,7 +36,6 @@ for t = 1:length(types)
   errs = errs/n_avg;
   errs_no_norm = errs_no_norm/n_avg;
   timez = timez/n_avg;
-  sparsity = sparsity/n_avg;
 
   save(['mat/',types{t}, '_shifts_expr.mat']);
 end
