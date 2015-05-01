@@ -41,7 +41,7 @@ elseif strcmp(type, 'GaussianNoise')
   x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
   
   lvl = .005;
-  e = randn(n,1);
+  e = randn(m,1);
   e = rand*lvl*e./norm(e);
   y = A*x+e; 
 elseif strcmp(type, 'Uni')
