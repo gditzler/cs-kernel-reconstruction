@@ -30,6 +30,20 @@ if strcmp(type, 'Gaussian')
   rp = randperm(n); % generate random permutations
   x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
   y = A*x;          % generate the linear model: "y=Ax"
+elseif strcmp(type, 'GaussianNoise')
+  A = randn(m,n); 
+  while m ~= rank(A)
+    A = randn(m,n);
+  end
+  x = zeros(n,1);
+  p = randn(k,1);   % generate "k" non-zero elements of "x"
+  rp = randperm(n); % generate random permutations
+  x(rp(1:k)) = p;   % place the "k" non-zero elements in random positions in "x"
+  
+  lvl = .005;
+  e = randn(n,1);
+  e = rand*lvl*e./norm(e);
+  y = A*x+e; 
 elseif strcmp(type, 'Uni')
   A = rand(m,n); 
   while m ~= rank(A)

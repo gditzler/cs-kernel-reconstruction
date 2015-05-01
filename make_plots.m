@@ -3,12 +3,12 @@ clc;
 % clear;
 close all;
 
-load mat/Gaussian_n20k7ka9.mat
+% load mat/Gaussian_n20k7ka9.mat
 base = 'Gaussian';
 % load mat/Uni_n20k9ka9.mat
 %load mat/GaussianShift_n20k7ka9.mat
 % load mat/Bernoulli_n20k9ka9.mat
-% load mat/Gaussian_n20k9ka9.mat
+load mat/Gaussian_n20k9ka9.mat
 
 I = 5:M;%2:size(errs_no_norm,2);
 

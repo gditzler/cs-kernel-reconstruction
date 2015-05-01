@@ -4,12 +4,12 @@ close all;
 
 addpath('src/')
 
-n_avg = 100;
+n_avg = 250;
 n = 50;
 k = 10;
 M = n-3;
 shifts = [0,1,2,3,4];
-types = {'Gaussian', 'Uni', 'Bernoulli'};
+types = {'Gaussian'};
 delete(gcp('nocreate'));
 parpool(50);
 
@@ -28,8 +28,8 @@ for t = 1:length(types)
         tic;
         [x_l1kr, x_l1] = l1kr(A, y, shifts(q));
         timez(q, m) = timez(q, m) + toc;
-        errs(q, m) = errs(q, m) + per_error(x_l1kr/norm(x_l1kr), x/norm(x));
-        errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_l1kr, x);       
+        errs(q, m) = errs(q, m) + per_error(x/norm(x), x_l1kr/norm(x_l1kr));
+        errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x, x_l1kr);       
       end
     end
   end

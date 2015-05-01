@@ -42,8 +42,8 @@ sgn = sign(x);
 smallest = i(1:s);     % find the s+delta smallest entriries 
 largest = setdiff(1:n, smallest);
 x_tmp = x_tmp(largest);
-sgn_largest = sgn(largest);
 lgst_smallest = max(abs(x(smallest)));
+sgn_largest = sign(x_tmp);
 
 x_tmp(sgn_largest == 1) =  x_tmp(sgn_largest == 1) - lgst_smallest;
 x_tmp(sgn_largest == -1) = x_tmp(sgn_largest == -1) + lgst_smallest;
@@ -58,13 +58,13 @@ combrows = combnk(smallest, s);  % generate combinations of the s+delta indices
 % loop over the possibilites of the s+delta entries that could be tested
 % for being a `zero` entry. 
 sp = zeros(size(combrows, 1), 1);
-parfor r = 1:size(combrows, 1)
+for r = 1:size(combrows, 1)
   j = setdiff(1:n, combrows(r, :));
 
   xhat = A(:, j)\y;
   x_kr = zeros(n, 1);
   x_kr(j) = xhat;
-  q = sort(abs(x_kr));
+  [~, q] = sort(abs(x_kr));
   x_kr_final = x_kr;
   
   for k = 1:n
@@ -77,6 +77,7 @@ parfor r = 1:size(combrows, 1)
   
   sp(r) = sum(abs(x_kr_final) > 10e-15);  % sparisty 
 end
+[~, i] = sort(sp);
 
 
 % solve for the sparest solution again

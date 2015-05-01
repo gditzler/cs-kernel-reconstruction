@@ -43,13 +43,13 @@ for t = 1:length(types)
       tic;
       [~, x_kr_err, x_kr_spar] = l0_exact_reconstruction(A, x, y);
       timez(q, m) = timez(q, m) + toc;
-      errs(q, m) = errs(q, m) + per_error(x_kr_err/norm(x_kr_err), x/norm(x));
-      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_kr_err, x);
+      errs(q, m) = errs(q, m) + per_error(x/norm(x), x_kr_err/norm(x_kr_err));
+      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x, x_kr_err);
       sparsity(q, m) = sparsity(q, m) + sum(abs(x_kr_err) <= sqrt(eps))/numel(x);
       q = q+1;
 
-      errs(q, m) = errs(q, m) + per_error(x_kr_spar/norm(x_kr_spar), x/norm(x));
-      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_kr_spar, x);
+      errs(q, m) = errs(q, m) + per_error(x/norm(x), x_kr_spar/norm(x_kr_spar));
+      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x, x_kr_spar);
       sparsity(q, m) = sparsity(q, m) + sum(abs(x_kr_spar) <= sqrt(eps))/numel(x);
       q = q+1;
 
@@ -57,8 +57,8 @@ for t = 1:length(types)
       tic;
       x_hat = cosamp(A, y, k_alg, errFcn, opts);
       timez(q, m) = timez(q, m) + toc;
-      errs(q, m) = errs(q, m) + per_error(x_hat/norm(x_hat), x/norm(x));
-      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_hat, x);
+      errs(q, m) = errs(q, m) + per_error(x/norm(x), x_hat/norm(x_hat));
+      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x, x_hat);
       sparsity(q, m) = sparsity(q, m) + sum(abs(x_hat) >= sqrt(eps))/numel(x);
       q = q+1;
 
@@ -66,8 +66,8 @@ for t = 1:length(types)
       tic;
       x_omp = omp(A, y, k_alg, errFcn, opts);
       timez(q, m) = timez(q, m) + toc;
-      errs(q, m) = errs(q, m) + per_error(x_omp/norm(x_omp), x/norm(x));
-      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_omp, x);
+      errs(q, m) = errs(q, m) + per_error(x/norm(x), x_omp/norm(x_omp));
+      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x, x_omp);
       sparsity(q, m) = sparsity(q, m) + sum(abs(x_omp) >= sqrt(eps))/numel(x);
       q = q+1;
 
@@ -75,13 +75,13 @@ for t = 1:length(types)
       tic;
       [x_l1kr, x_l1] = l1kr(A, y);
       timez(q, m) = timez(q, m) + toc;
-      errs(q, m) = errs(q, m) + per_error(x_l1kr/norm(x_l1kr), x/norm(x));
-      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_l1kr, x);
+      errs(q, m) = errs(q, m) + per_error(x/norm(x), x_l1kr/norm(x_l1kr));
+      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x, x_l1kr);
       sparsity(q, m) = sparsity(q, m) + sum(abs(x_l1kr) >= sqrt(eps))/numel(x);
       q = q+1;
       
       errs(q, m) = errs(q, m) + per_error(x_l1/norm(x_l1), x/norm(x));
-      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x_l1, x);
+      errs_no_norm(q, m) = errs_no_norm(q, m) + per_error(x, x_l1);
       sparsity(q, m) = sparsity(q, m) + sum(abs(x_l1) >= sqrt(eps))/numel(x);
       
     end
