@@ -16,7 +16,7 @@ addpath('src/')
 
 n_avg = 250;
 n = 20;
-k = 7;
+k = 4;
 M = n-3;
 k_alg = 9;
 types = {'Gaussian', 'Uni', 'Bernoulli'};

@@ -41,13 +41,16 @@ sgn = sign(x);
 
 smallest = i(1:s);     % find the s+delta smallest entriries 
 largest = setdiff(1:n, smallest);
-sgn_largest = sgn(x(largest));
+x_tmp = x_tmp(largest);
+sgn_largest = sgn(largest);
 lgst_smallest = max(abs(x(smallest)));
 
-x_tmp(sgn_largest == 1) = lgst_smallest - x_tmp(sgn_largest == 1);
-x_tmp(sgn_largest == -1) = lgst_smallest + x_tmp(sgn_largest == -1);
+x_tmp(sgn_largest == 1) =  x_tmp(sgn_largest == 1) - lgst_smallest;
+x_tmp(sgn_largest == -1) = x_tmp(sgn_largest == -1) + lgst_smallest;
+x_tmp2 = zeros(n, 1);
+x_tmp2(largest) = x_tmp;
 
-sup_set = find(abs(x_tmp) <= epsilon);
+sup_set = find(abs(x_tmp2) <= epsilon);
 smallest = union(smallest, sup_set);
 
 combrows = combnk(smallest, s);  % generate combinations of the s+delta indices

@@ -46,10 +46,9 @@ combrows = combnk(smallest, s);  % generate combinations of the s+delta indices
 % loop over the possibilites of the s+delta entries that could be tested
 % for being a `zero` entry. 
 sp = zeros(size(combrows, 1), 1);
-parfor r = 1:size(combrows, 1)
+for r = 1:size(combrows, 1)
   j = setdiff(1:n, combrows(r, :));
-
-  xhat = A(:, j)\y;
+  xhat =A(:, j)\y;
   x_kr = zeros(n, 1);
   x_kr(j) = xhat;
   sp(r) = sum(abs(x_kr) > 10e-15);  % sparisty 
