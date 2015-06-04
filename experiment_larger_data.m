@@ -25,7 +25,8 @@ k_alg_set = floor(.1*n_set);
 types = {'Gaussian', 'Uni',   'Bernoulli'};
 opts.printEvery = 10000000;
 errFcn = [];
-  
+epsilon = 0.05;
+
 delete(gcp('nocreate'));
 parpool(20);
 
