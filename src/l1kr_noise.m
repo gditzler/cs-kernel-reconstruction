@@ -4,14 +4,14 @@ function [x_kr, x_l1] = l1kr_noise(A, y, epsilon)
 %  INPUTS 
 %  @A: measurement matrix  
 %  @y: obeserved vector 
-%  @shift: 
+%  @epsilon: bound on the reconstruction error
 %
 %  OUTPUTS
 %  @x_kr: solution to the system using the l1-kr approx
 %  @x_l1: solution to the system using l1
 %
 %  AUTHORS
-%    Belhassan Bayer, Nidhal Bouynaya, Gregory Ditzler and Roman 
+%    Belhassan Bayer, Nidhal Bouynaya, Gregory Ditzler and Roman Shterenberg
 %
 %  MAINTAINER
 %    Gregory Ditzler (gregory.ditzler@gmail.com)
