@@ -6,7 +6,7 @@ addpath('src/')
 
 n_avg = 250;
 n = 20;
-k = 4;
+k = 9;
 M = n-3;
 k_alg = 9;
 epsilon = 0.05;
@@ -63,4 +63,4 @@ end
 errs_clean = errs_clean/n_avg;
 errs_noise = errs_noise/n_avg;
 
-saveas('mat/noise_experiments.mat');
+save('mat/noise_experiments.mat');
