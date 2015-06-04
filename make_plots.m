@@ -3,14 +3,15 @@ clc;
 % clear;
 close all;
 
-% load mat/Gaussian_n20k7ka9.mat
-base = 'Gaussian';
-% load mat/Uni_n20k9ka9.mat
-%load mat/GaussianShift_n20k7ka9.mat
-% load mat/Bernoulli_n20k9ka9.mat
-load mat/Gaussian_n20k9ka9.mat
 
-I = 5:M;%2:size(errs_no_norm,2);
+% base = 'Bernoulli';
+% load mat/Bernoulli_n20k9ka9.mat
+base = 'Gaussian';
+load mat/Gaussian_n20k9ka9.mat
+% base = 'Uni';
+% load mat/Uni_n20k9ka9.mat
+
+I = 5:M; %2:size(errs_no_norm,2);
 
 % 1) kr (min error)
 % 2) kr (min sparse)
@@ -22,14 +23,19 @@ I = 5:M;%2:size(errs_no_norm,2);
 h = figure; 
 hold on;
 box on;
-plot(I, errs_no_norm(2, I), 'ro-', 'LineWidth', 2);
-plot(I, errs_no_norm(3, I), 'bs-', 'LineWidth', 2);
-plot(I, errs_no_norm(4, I), 'k^-', 'LineWidth', 2);
-plot(I, errs_no_norm(5, I), 'cp-', 'LineWidth', 2);
-plot(I, errs_no_norm(6, I), 'ms-', 'LineWidth', 2);
-xlim([1, M])
-ylim([0, 1.5*max(errs_no_norm(3,I))])
+plot(I, errs(2, I), 'ro-', 'LineWidth', 2);
+plot(I, errs(3, I), 'bs-', 'LineWidth', 2);
+plot(I, errs(4, I), 'k^-', 'LineWidth', 2);
+plot(I, errs(5, I), 'cp-', 'LineWidth', 2);
+plot(I, errs(6, I), 'ms-', 'LineWidth', 2);
+% plot(I, errs_no_norm(2, I), 'ro-', 'LineWidth', 2);
+% plot(I, errs_no_norm(3, I), 'bs-', 'LineWidth', 2);
+% plot(I, errs_no_norm(4, I), 'k^-', 'LineWidth', 2);
+% plot(I, errs_no_norm(5, I), 'cp-', 'LineWidth', 2);
+% plot(I, errs_no_norm(6, I), 'ms-', 'LineWidth', 2);
 axis tight;
+xlim([5, M])
+ylim([0, 1.5])
 % legend('CoSamp', 'OMP', 'L1KR', 'L1', 'Location', 'best');
 legend('KR', 'CoSamp', 'OMP', 'AKRON', 'L1', 'Location', 'best');
 xlabel('m', 'FontSize', 20);
