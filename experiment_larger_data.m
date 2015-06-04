@@ -83,7 +83,7 @@ for t = 1:length(types)
       
       % L1Noise-Approx of KR
       tic;
-      [x_l1kr, x_l1] = l1kr_noise(A, y);
+      [x_l1kr, x_l1] = l1kr_noise(A, y, epsilon);
       timez(q, j) = timez(q, j) + toc;
       errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1kr/norm(x_l1kr));
       errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x_l1kr, x);
