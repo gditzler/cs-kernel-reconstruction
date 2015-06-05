@@ -10,9 +10,6 @@ function [x_kr, x_l1] = l1kr(A, y, shift)
 %  @x_kr: solution to the system using the l1-kr approx
 %  @x_l1: solution to the system using l1
 %
-%  AUTHORS
-%    Belhassan Bayer, Nidhal Bouynaya, Gregory Ditzler and Roman 
-%
 %  MAINTAINER
 %    Gregory Ditzler (gregory.ditzler@gmail.com)
 %
