@@ -119,5 +119,17 @@ for i = 1:n_avg
 end
 errs_clean = errs_clean/n_avg;
 errs_noise = errs_noise/n_avg;
+errs_clean_unit = errs_clean_unit/n_avg;
+errs_noise_unit = errs_noise_unit/n_avg;
+
+errs_clean_2 = errs_clean_2/n_avg;
+errs_noise_2 = errs_noise_2/n_avg;
+errs_clean_unit_2 = errs_clean_unit_2/n_avg;
+errs_noise_unit_2 = errs_noise_unit_2/n_avg;
+
+var_errs_clean_2 = errs_clean_2 - errs_clean.^2;
+var_errs_noise_2 = errs_noise_2 - errs_noise.^2';
+var_errs_clean_unit_2 = errs_clean_unit_2 - errs_clean_unit.^2';
+var_errs_noise_unit_2 = errs_noise_unit_2 - errs_noise_unit.^2';
 
 save('mat/noise_experiments.mat');

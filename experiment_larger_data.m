@@ -1,6 +1,4 @@
 %%
-%  AUTHORS
-%    Belhassan Bayer, Nidhal Bouynaya, and Gregory Ditzler
 %
 %  MAINTAINER
 %    Gregory Ditzler (gregory.ditzler@gmail.coj)
