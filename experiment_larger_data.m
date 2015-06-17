@@ -72,27 +72,27 @@ for t = 1:length(types)
       [x_l1kr, x_l1] = l1kr(A, y);
       timez(q, j) = timez(q, j) + toc;
       errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1kr/norm(x_l1kr));
-      errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x_l1kr, x);
+      errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x, x_l1kr);
       sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1kr) >= sqrt(eps))/numel(x);
       q = q+1;
       
       errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1/norm(x_l1));
-      errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x_l1, x);
+      errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x, x_l1);
       sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1) >= sqrt(eps))/numel(x);
       q = q+1;
       
-      %L1Noise-Approx of KR
-      % tic;
-      %[x_l1kr, x_l1] = l1kr_noise(A, y, epsilon);
-      %timez(q, j) = timez(q, j) + toc;
-      %errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1kr/norm(x_l1kr));
-      %errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x_l1kr, x);
-      %sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1kr) >= sqrt(eps))/numel(x);
-      %q = q+1;
+      % L1Noise-Approx of KR
+      tic;
+      [x_l1kr, x_l1] = l1kr_noise(A, y, epsilon);
+      timez(q, j) = timez(q, j) + toc;
+      errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1kr/norm(x_l1kr));
+      errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x,x_l1kr);
+      sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1kr) >= sqrt(eps))/numel(x);
+      q = q+1;
       
-      %errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1/norm(x_l1));
-      %errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x_l1, x);
-      %sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1) >= sqrt(eps))/numel(x);
+      errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1/norm(x_l1));
+      errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x, x_l1);
+      sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1) >= sqrt(eps))/numel(x);
       
     end
     

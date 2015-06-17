@@ -11,8 +11,6 @@ function [A, x, y] = cs_model(m, n, k, type)
 %  @x: sparsest solution  
 %  @y: observation vector 
 %
-%  AUTHORS
-%    Belhassan Bayer, Nidhal Bouynaya, and Gregory Ditzler
 %
 %  MAINTAINER
 %    Gregory Ditzler (gregory.ditzler@gmail.com)

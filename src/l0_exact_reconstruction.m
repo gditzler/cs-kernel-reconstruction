@@ -13,8 +13,6 @@ function [min_err, x_min_error, x_sparsest, min_zeros, Xsol] = l0_exact_reconstr
 %  @min_zeros: sparsity of the solution 
 %  @Xsol: collection of (n choose s) solutions
 %
-%  AUTHORS
-%    Belhassan Bayer, Nidhal Bouynaya, and Gregory Ditzler
 %
 %  MAINTAINER
 %    Gregory Ditzler (gregory.ditzler@gmail.com)
