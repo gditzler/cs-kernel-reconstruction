@@ -12,12 +12,12 @@ clc;
 clear;
 close all;
 
-set(0,'RecursionLimit', 5000);
+set(0,'RecursionLimit', 10000);
 
 addpath('src/')
 
 n_avg = 250;
-n_set = [100:25:500 600:1000];
+n_set = [50:10:100];
 k_set = floor(.05*n_set);
 M = 20;
 m = 30;
@@ -81,18 +81,18 @@ for t = 1:length(types)
       sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1) >= sqrt(eps))/numel(x);
       q = q+1;
       
-      % L1Noise-Approx of KR
-      tic;
-      [x_l1kr, x_l1] = l1kr_noise(A, y, epsilon);
-      timez(q, j) = timez(q, j) + toc;
-      errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1kr/norm(x_l1kr));
-      errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x_l1kr, x);
-      sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1kr) >= sqrt(eps))/numel(x);
-      q = q+1;
+      %L1Noise-Approx of KR
+      % tic;
+      %[x_l1kr, x_l1] = l1kr_noise(A, y, epsilon);
+      %timez(q, j) = timez(q, j) + toc;
+      %errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1kr/norm(x_l1kr));
+      %errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x_l1kr, x);
+      %sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1kr) >= sqrt(eps))/numel(x);
+      %q = q+1;
       
-      errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1/norm(x_l1));
-      errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x_l1, x);
-      sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1) >= sqrt(eps))/numel(x);
+      %errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1/norm(x_l1));
+      %errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x_l1, x);
+      %sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1) >= sqrt(eps))/numel(x);
       
     end
     
