@@ -17,12 +17,12 @@ set(0,'RecursionLimit', 10000);
 addpath('src/')
 
 n_avg = 250;
-n_set = [50:10:100];
+n_set = [50:10:250];
 k_set = floor(.05*n_set);
 M = 20;
-m = 30;
+m = 20;
 k_alg_set = floor(.1*n_set);
-types = {'Gaussian', 'Uni',   'Bernoulli'};
+types = {'Gaussian'}; 
 opts.printEvery = 10000000;
 errFcn = [];
 epsilon = 0.05;
@@ -50,6 +50,7 @@ for t = 1:length(types)
       q = 1;
 
       % CoSamp
+      %disp('CoSaMP')
       tic;
       x_hat = cosamp(A, y, k_alg, errFcn, opts);
       timez(q, j) = timez(q, j) + toc;
@@ -59,6 +60,7 @@ for t = 1:length(types)
       q = q+1;
 
       % OMP
+      %disp('OMP')
       tic;
       x_omp = omp(A, y, k_alg, errFcn, opts);
       timez(q, j) = timez(q, j) + toc;
@@ -68,6 +70,7 @@ for t = 1:length(types)
       q = q+1;
 
       % L1-Approx of KR
+      %disp('AKRON')
       tic;
       [x_l1kr, x_l1] = l1kr(A, y);
       timez(q, j) = timez(q, j) + toc;
@@ -82,17 +85,18 @@ for t = 1:length(types)
       q = q+1;
       
       % L1Noise-Approx of KR
-      tic;
-      [x_l1kr, x_l1] = l1kr_noise(A, y, epsilon);
-      timez(q, j) = timez(q, j) + toc;
-      errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1kr/norm(x_l1kr));
-      errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x,x_l1kr);
-      sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1kr) >= sqrt(eps))/numel(x);
-      q = q+1;
+      % disp('AKRONoi')
+      % tic;
+      % [x_l1kr, x_l1] = l1kr_noise(A, y, epsilon);
+      % timez(q, j) = timez(q, j) + toc;
+      % errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1kr/norm(x_l1kr));
+      % errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x,x_l1kr);
+      % sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1kr) >= sqrt(eps))/numel(x);
+      % q = q+1;
       
-      errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1/norm(x_l1));
-      errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x, x_l1);
-      sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1) >= sqrt(eps))/numel(x);
+      % errs(q, j) = errs(q, j) + per_error(x/norm(x), x_l1/norm(x_l1));
+      % errs_no_norm(q, j) = errs_no_norm(q, j) + per_error(x, x_l1);
+      % sparsity(q, j) = sparsity(q, j) + sum(abs(x_l1) >= sqrt(eps))/numel(x);
       
     end
     
