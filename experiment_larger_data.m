@@ -17,12 +17,13 @@ set(0,'RecursionLimit', 5000);
 addpath('src/')
 
 n_avg = 250;
-n_set = [100:25:500 600:1000];
+n_set = [25:25:250];
 k_set = floor(.05*n_set);
 M = 20;
 m = 30;
 k_alg_set = floor(.1*n_set);
 types = {'Gaussian', 'Uni',   'Bernoulli'};
+types = {'Gaussian'};
 opts.printEvery = 10000000;
 errFcn = [];
 epsilon = 0.05;
