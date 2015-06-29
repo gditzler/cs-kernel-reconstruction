@@ -1,6 +1,4 @@
 %%
-%  AUTHORS
-%    Belhassan Bayer, Nidhal Bouynaya, and Gregory Ditzler
 %
 %  MAINTAINER
 %    Gregory Ditzler (gregory.ditzler@gmail.coj)
@@ -12,7 +10,7 @@ clc;
 clear;
 close all;
 
-set(0,'RecursionLimit', 5000);
+set(0,'RecursionLimit', 10000);
 
 addpath('src/')
 
@@ -20,9 +18,8 @@ n_avg = 250;
 n_set = [25:25:250];
 k_set = floor(.05*n_set);
 M = 20;
-m = 30;
+m = 20;
 k_alg_set = floor(.1*n_set);
-types = {'Gaussian', 'Uni',   'Bernoulli'};
 types = {'Gaussian'};
 opts.printEvery = 10000000;
 errFcn = [];
@@ -51,6 +48,7 @@ for t = 1:length(types)
       q = 1;
 
       % CoSamp
+      %disp('CoSaMP')
       tic;
       x_hat = cosamp(A, y, k_alg, errFcn, opts);
       timez(q, j) = timez(q, j) + toc;
@@ -60,6 +58,7 @@ for t = 1:length(types)
       q = q+1;
 
       % OMP
+      %disp('OMP')
       tic;
       x_omp = omp(A, y, k_alg, errFcn, opts);
       timez(q, j) = timez(q, j) + toc;
@@ -69,6 +68,7 @@ for t = 1:length(types)
       q = q+1;
 
       % L1-Approx of KR
+      %disp('AKRON')
       tic;
       [x_l1kr, x_l1] = l1kr(A, y);
       timez(q, j) = timez(q, j) + toc;
@@ -83,6 +83,7 @@ for t = 1:length(types)
       q = q+1;
       
       % L1Noise-Approx of KR
+      disp('AKRONoi')
       tic;
       [x_l1kr, x_l1] = l1kr_noise(A, y, epsilon);
       timez(q, j) = timez(q, j) + toc;
@@ -104,7 +105,7 @@ for t = 1:length(types)
   sparsity = sparsity/n_avg;
   timez = timez/n_avg;
   
-  save(['mat/large_',types{t}, 'k', num2str(k), '.mat']);
+  save(['mat/large_',types{t}, 'k', num2str(k), '_noise.mat']);
 end
 
 delete(gcp('nocreate'));
