@@ -26,7 +26,7 @@ errFcn = [];
 epsilon = 0.05;
 
 delete(gcp('nocreate'));
-parpool(50);
+parpool(90);
 
 for t = 1:length(types)
   errs = zeros(7, length(n_set));
